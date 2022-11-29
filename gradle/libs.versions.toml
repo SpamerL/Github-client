@@ -1,0 +1,50 @@
+[versions]
+gradleplugin = "7.3.0"
+kotlin = "1.7.20"
+retrofit = "2.9.0"
+moshi = "1.14.0"
+retrofit-moshi-converter = "2.9.0"
+cicerone = "7.1"
+viewmodel = "2.5.1"
+coil = "2.2.2"
+hilt = "2.44"
+room = "2.4.3"
+paging_version = "3.1.1"
+fragment = "1.5.4"
+activity = "1.5.1"
+nav_version = "2.5.3"
+
+
+
+[libraries]
+cicerone = { module = "com.github.terrakok:cicerone", version.ref = "cicerone" }
+viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "viewmodel" }
+fragment = { module = "androidx.fragment:fragment", version.ref = "fragment" }
+fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
+activity = { module = "androidx.activity:activity-ktx", version.ref = "activity" }
+navigation-fragment = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "nav_version" }
+navigation-ui = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "nav_version" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit.moshi.converter" }
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshiCodegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+room = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+paging = { module = "androidx.paging:paging-runtime", version.ref = "paging_version" }
+
+
+
+[bundles]
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "gradleplugin" }
+android-library = { id = "com.android.library", version.ref = "gradleplugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
