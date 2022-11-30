@@ -22,7 +22,6 @@ class DownloadsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activity?.title = "Downloads"
     }
 
     override fun onCreateView(
@@ -30,7 +29,6 @@ class DownloadsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        activity?.title = "Downloads"
         binding = FragmentDownloadsBinding.inflate(
             inflater,
             container,
@@ -47,7 +45,12 @@ class DownloadsFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.downloads.collect {
                     if (it.isNotEmpty()) {
-                        adapter.submitList(it)
+                        adapter.submitList(it.reversed())
+                    } else {
+                        binding.downloadRv.visibility = View.GONE
+                        binding.emptyContainerCv.visibility = View.VISIBLE
+                        binding.emptyTv.visibility = View.VISIBLE
+                        binding.emptyIconIv.visibility = View.VISIBLE
                     }
                 }
             }

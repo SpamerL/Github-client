@@ -23,11 +23,8 @@ class ReposViewModel @Inject constructor(
     private val _reposUIState: MutableStateFlow<ReposUIState> = MutableStateFlow(ReposUIState.Loading)
     val reposUIState: StateFlow<ReposUIState> get() = _reposUIState
 
-    var repositoryOwner: String = ""
-
     init {
         val userName = savedStateHandle.get<String>("userName") ?: throw Exception()
-        repositoryOwner = userName
         getUserRepositories(userName)
     }
 

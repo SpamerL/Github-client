@@ -38,7 +38,6 @@ class MainFragment : Fragment() {
             container,
             false
         )
-        activity?.title = "Github client"
         adapter = UserAdapter { userModel ->
             onUserListItemClickListener(userModel)
         }

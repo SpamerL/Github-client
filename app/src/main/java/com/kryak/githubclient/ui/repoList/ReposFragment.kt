@@ -22,14 +22,11 @@ class ReposFragment : Fragment(), CustomClickListener {
 
     private lateinit var binding: FragmentReposBinding
     private val viewModel: ReposViewModel by viewModels()
-
-    // private val viewModel: ReposViewModel by hiltNavGraphViewModels(R.id.mobile_navigation)
     private lateinit var adapter: RepoAdapter
     private lateinit var clickListener: CustomClickListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        activity.title = viewModel.repositoryOwner
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -52,7 +49,6 @@ class ReposFragment : Fragment(), CustomClickListener {
         clickListener = this
         adapter = RepoAdapter(clickListener)
         setupUI(binding, adapter)
-        activity?.title = viewModel.repositoryOwner
         subscribeUI(viewModel)
         return binding.root
     }
@@ -67,14 +63,11 @@ class ReposFragment : Fragment(), CustomClickListener {
                 viewModel.reposUIState.collect {
                     when (it) {
                         ReposUIState.Error -> {
-                            requireActivity().title = viewModel.repositoryOwner
                         }
                         ReposUIState.Loading -> {
-                            requireActivity().title = viewModel.repositoryOwner
                         }
                         is ReposUIState.Success -> {
                             adapter.submitList(it.repos)
-                            requireActivity().title = viewModel.repositoryOwner
                         }
                     }
                 }
