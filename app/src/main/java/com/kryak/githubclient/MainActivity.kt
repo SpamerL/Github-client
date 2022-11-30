@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration)
     }
-    
+
     private fun checkPermission(): Boolean {
         val result = ContextCompat.checkSelfPermission(
             this,
