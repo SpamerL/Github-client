@@ -1,6 +1,5 @@
 package com.kryak.githubclient.ui.repoList
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,10 +26,10 @@ class ReposFragment : Fragment(), CustomClickListener {
     // private val viewModel: ReposViewModel by hiltNavGraphViewModels(R.id.mobile_navigation)
     private lateinit var adapter: RepoAdapter
     private lateinit var clickListener: CustomClickListener
-    private lateinit var activity: Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        activity.title = viewModel.repositoryOwner
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
@@ -53,13 +52,12 @@ class ReposFragment : Fragment(), CustomClickListener {
         clickListener = this
         adapter = RepoAdapter(clickListener)
         setupUI(binding, adapter)
+        activity?.title = viewModel.repositoryOwner
         subscribeUI(viewModel)
         return binding.root
     }
 
     private fun setupUI(binding: FragmentReposBinding, adapter: RepoAdapter) {
-        activity = requireActivity()
-        activity.title = viewModel.repositoryOwner
         binding.reposRv.adapter = adapter
     }
 
@@ -68,10 +66,15 @@ class ReposFragment : Fragment(), CustomClickListener {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.reposUIState.collect {
                     when (it) {
-                        ReposUIState.Error -> {}
-                        ReposUIState.Loading -> {}
+                        ReposUIState.Error -> {
+                            requireActivity().title = viewModel.repositoryOwner
+                        }
+                        ReposUIState.Loading -> {
+                            requireActivity().title = viewModel.repositoryOwner
+                        }
                         is ReposUIState.Success -> {
                             adapter.submitList(it.repos)
+                            requireActivity().title = viewModel.repositoryOwner
                         }
                     }
                 }

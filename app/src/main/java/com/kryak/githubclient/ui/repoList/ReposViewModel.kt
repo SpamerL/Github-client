@@ -18,16 +18,16 @@ import javax.inject.Inject
 class ReposViewModel @Inject constructor(
     private val repository: Repository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
-    private val savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _reposUIState: MutableStateFlow<ReposUIState> = MutableStateFlow(ReposUIState.Loading)
     val reposUIState: StateFlow<ReposUIState> get() = _reposUIState
 
-    lateinit var repositoryOwner: String
+    var repositoryOwner: String = ""
 
     init {
-        val userName = savedStateHandle.get<String>("userName")
-        repositoryOwner = userName!!
+        val userName = savedStateHandle.get<String>("userName") ?: throw Exception()
+        repositoryOwner = userName
         getUserRepositories(userName)
     }
 

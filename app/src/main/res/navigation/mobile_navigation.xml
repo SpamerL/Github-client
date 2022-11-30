@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.kryak.githubclient.ui.main.MainFragment"
-        android:label="fragment_main"
+        android:label="Github client"
         tools:layout="@layout/fragment_main" >
         <action
             android:id="@+id/action_mainFragment_to_reposFragment"
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/reposFragment"
         android:name="com.kryak.githubclient.ui.repoList.ReposFragment"
-        android:label="fragment_repos"
+        android:label="{userName}"
         tools:layout="@layout/fragment_repos" >
         <argument
             android:name="userName"
@@ -30,6 +30,6 @@
     <fragment
         android:id="@+id/downloadsFragment"
         android:name="com.kryak.githubclient.ui.downloads.DownloadsFragment"
-        android:label="fragment_downloads"
+        android:label="Downloads"
         tools:layout="@layout/fragment_downloads" />
 </navigation>

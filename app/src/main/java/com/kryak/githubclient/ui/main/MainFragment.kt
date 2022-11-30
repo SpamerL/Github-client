@@ -25,6 +25,7 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.title = "Github client"
     }
 
     override fun onCreateView(
@@ -37,6 +38,7 @@ class MainFragment : Fragment() {
             container,
             false
         )
+        activity?.title = "Github client"
         adapter = UserAdapter { userModel ->
             onUserListItemClickListener(userModel)
         }

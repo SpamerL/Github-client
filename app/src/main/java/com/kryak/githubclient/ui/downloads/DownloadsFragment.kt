@@ -20,11 +20,17 @@ class DownloadsFragment : Fragment() {
     private lateinit var binding: FragmentDownloadsBinding
     private lateinit var adapter: DownloadAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.title = "Downloads"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activity?.title = "Downloads"
         binding = FragmentDownloadsBinding.inflate(
             inflater,
             container,
