@@ -1,9 +1,13 @@
 package com.kryak.githubclient.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Lifecycle
@@ -50,11 +54,37 @@ class MainFragment : Fragment() {
         binding.userRv.adapter = adapter
         // user search setup
         binding.userSearchContainer.setEndIconOnClickListener {
-            if (!binding.userSearchContainer.editText?.text.isNullOrEmpty()) {
-                viewModel.searchUser(binding.userSearchContainer.editText?.text.toString())
-            } else {
-                binding.userSearchContainer.error = "empty line"
+            searchUser(binding)
+        }
+        binding.userSearchContainer.editText?.setOnEditorActionListener { textView, actionId, keyEvent ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    searchUser(binding)
+                    true
+                }
+                else -> false
             }
+        }
+        binding.userSearchContainer.editText?.doAfterTextChanged {
+            binding.userSearchContainer.error = null
+        }
+    }
+
+    private fun searchUser(binding: FragmentMainBinding) {
+        if (!binding.userSearchContainer.editText?.text.isNullOrEmpty()) {
+            viewModel.searchUser(binding.userSearchContainer.editText?.text.toString())
+            hideSoftKeyboard()
+        } else {
+            binding.userSearchContainer.error = "empty line"
+        }
+    }
+
+    private fun hideSoftKeyboard() {
+        val activity = requireActivity()
+        val view = activity.currentFocus
+        if (view != null) {
+            val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 
